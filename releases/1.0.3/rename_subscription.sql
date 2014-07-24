@@ -1,0 +1,1 @@
+ALTER TABLE user_show_subscriptions RENAME TO subscriptions;

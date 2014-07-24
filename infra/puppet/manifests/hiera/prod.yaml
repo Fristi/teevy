@@ -1,0 +1,8 @@
+db.listen  : ''
+db.root.pwd : 'blabla'
+db.teevy.pwd : 'blabla'
+db.acl : 'local teevy teevy md5'
+db.endpoint : '/var/run/postgresql'
+
+loggly.token : ''
+profile : 'prod'

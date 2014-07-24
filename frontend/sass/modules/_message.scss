@@ -1,0 +1,12 @@
+.message {
+  margin-bottom: 20px;
+  font-weight: 700;
+  border-radius: 4px;
+}
+
+.message--error {
+  @extend .message;
+
+  color: $light;
+  background: red;
+}

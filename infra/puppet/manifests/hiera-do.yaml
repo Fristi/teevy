@@ -1,0 +1,6 @@
+---
+:backends: 
+    - yaml
+:hierarchy: prod
+:yaml:
+    :datadir: /tmp/packer-puppet-masterless/manifests/hiera

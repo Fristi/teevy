@@ -1,0 +1,6 @@
+---
+:backends: 
+    - yaml
+:hierarchy: dev
+:yaml:
+    :datadir: /vagrant/infra/puppet/manifests/hiera

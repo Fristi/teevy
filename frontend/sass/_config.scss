@@ -1,0 +1,25 @@
+$layout-min-width: 400px;
+
+$base-font-family: 'Open Sans', sans-serif;
+$base-font-size:   14;
+$base-line-height: 18;
+
+$light: white;
+$green: #11BAA0;
+$light-blue: #8599A2;
+$dark-blue: #1B2226;
+
+// breakpoint widths in pixels
+$two-in-a-row: 540;
+$three-in-a-row: 800;
+$four-in-a-row: 1060;
+$five-in-a-row: 1320;
+
+// DO NOT TOUCH:
+// automatic generation of conditions for media-queries
+// need for css-wizardry grids
+$bp-one-in-a-row: '(max-width: #{$two-in-a-row - 1}px)';
+$bp-two-in-a-row: '(min-width: #{$two-in-a-row}px)';
+$bp-three-in-a-row: '(min-width: #{$three-in-a-row}px)';
+$bp-four-in-a-row: '(min-width: #{$four-in-a-row}px)';
+$bp-five-in-a-row: '(min-width: #{$five-in-a-row}px)';

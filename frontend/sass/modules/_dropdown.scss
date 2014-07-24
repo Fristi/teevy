@@ -1,0 +1,24 @@
+.dropdown {
+  position: absolute;
+  z-index: 10;
+
+  color: $dark-blue;
+
+  background: $light;
+  border: 3px solid #CED6DA;
+  border-radius: 4px;
+
+  &:before {
+    content: '';
+    display: block;
+    width: 16px; height: 16px;
+    position: absolute;
+    top: -10px;
+
+    background: $light;
+    border-left: 3px solid #CED6DA;
+    border-top: 3px solid #CED6DA;
+
+    @include rotateZ(45deg);
+  }
+}

@@ -1,0 +1,16 @@
+.selet-list {
+  //empty for now...
+}
+
+.select-list__item {
+  padding: 5px 10px;
+  cursor: pointer;
+
+  &.active {
+    background: #DAE0E3;
+  }
+
+  &.not-aired {
+    color: $light-blue;
+  }
+}

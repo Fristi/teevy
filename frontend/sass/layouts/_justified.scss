@@ -1,0 +1,42 @@
+/**
+ * JUSTIFIED LAYOUT:
+ * distribute child items equally across the parent box
+ *
+ * .l-justified                       - wrapper with text-align justify
+ *   .justified__item               - items to be distributed equally
+ *   :after                           - creates a break of the line, making the distribution possible
+ *
+ * description of idea here http://justifygrid.com/
+ */
+
+.l-justified {
+  text-align: justify;
+  text-justify: distribute-all-lines;
+
+  font-size: 0;
+  line-height: 0;
+
+  &:after {
+    content: '';
+    display: inline-block;
+    width: 100%;
+  }
+}
+
+.justified__item {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: left;
+  text-justify: auto;
+
+  font-size: #{$base-font-size}px; font-size: rem($base-font-size);
+  line-height: #{$base-line-height}px; line-height: rem($base-line-height);
+}
+
+.justified__item--responsive {
+  @extend .justified__item;
+
+  @include breakpoint($bp-one-in-a-row) {
+    width: 100%;
+  }
+}

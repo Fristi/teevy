@@ -1,0 +1,29 @@
+name:                teevy-database
+version:             0.1.0.32
+author:              Mark
+maintainer:          mail@markdejong.org
+build-type:          Simple
+cabal-version:       >=1.10
+
+library     
+  default-language: Haskell2010
+  ghc-options:      -Wall -fno-warn-orphans
+
+  hs-source-dirs:        src
+  exposed-modules:       Teevy.Database.Query
+                    ,    Teevy.Database.Instances
+                    ,    Teevy.Database.Models
+                    ,    Teevy.Database
+
+                    ,    Teevy.Database.Show
+                    ,    Teevy.Database.Subscription
+                    ,    Teevy.Database.User
+
+  build-depends:    base, 
+                    text >=1.1.0.0,
+                    bytestring==0.10.0.2,
+                    aeson >= 0.6.2.1 && <0.8,
+                    postgresql-simple == 0.4.0.2,
+                    ghc-prim,
+                    mtl>=2.1.2 && <2.2,
+                    time

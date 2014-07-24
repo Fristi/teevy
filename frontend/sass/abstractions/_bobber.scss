@@ -1,0 +1,45 @@
+/**
+ * BOBBER ABSTRACTION:
+ * (fishing bobber)
+ * handles vertical alignment of element: top / middle / bottom
+ *
+ *  .parent-box                           - parent box; should have height/width defined
+ *    .bobber__wrap                       - wrapper for bobber; modifier --center adds horizontal alignment
+ *      .item-to-center.bobber            - will have vertical alignment specified by a modifier --middle, --bottom
+ *      :after                            - makes the vertical alignment possible
+ *
+ * idea description here http://css-tricks.com/centering-in-the-unknown/
+ */
+
+.bobber__wrap {
+  height: 100%; width: 100%;
+
+  &:after {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+    margin-left: -0.25rem;
+  }
+}
+
+.bobber__wrap--center {
+  @extend .bobber__wrap;
+  text-align: center;
+}
+
+.bobber {
+  display: inline-block;
+  vertical-align: top;
+  max-width: 98%; // hack to prevent occupy 100% for small screens
+}
+
+.bobber--middle {
+  @extend .bobber;
+  vertical-align: middle;
+}
+
+.bobber--bottom {
+  @extend .bobber;
+  vertical-align: bottom;
+}

@@ -1,0 +1,43 @@
+.landing-pitch {
+  color: $light-blue;
+  font-size: 20px; font-size: rem(20);
+  line-height: 30px; line-height: rem(30);
+
+  background: url('/images/landing-bg.jpg');
+  background-repeat: no-repeat;
+  background-position: top left;
+  background-size: cover;
+
+  @media only screen {
+    font-size: 16px; font-size: rem(16);
+    line-height: 22px; line-height: rem(22);
+  }
+
+  @include breakpoint($bp-three-in-a-row) {
+    font-size: 20px; font-size: rem(20);
+    line-height: 30px; line-height: rem(30);
+  }
+}
+
+.landing-pitch__heading {
+  padding-left: 20px; padding-left: rem(20);
+  padding-right: 20px; padding-right: rem(20);
+
+  color: $light;
+  margin-bottom: 10px;
+  margin-bottom: rem(10);
+  margin-top: 100px;
+  margin-top: rem(100);
+
+  font-size: 1.8em;
+  line-height: 1.2em;
+}
+
+.landing-pitch__slogan {
+  padding-left: 20px; padding-left: rem(20);
+  padding-right: 20px; padding-right: rem(20);
+}
+
+.landing-pitch__tiles {
+  display: block;
+}

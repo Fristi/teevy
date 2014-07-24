@@ -1,0 +1,59 @@
+.show-tile {
+  position: relative;
+  width: 240px; width: rem(240);
+  height: 353px; height: rem(353);
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px; margin-bottom: rem(20);
+
+  overflow: hidden;
+  text-align: center;
+
+  border-radius: 4px;
+  background: $dark-blue;
+}
+
+.show-tile__overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+
+  color: $light;
+
+  background: rgba(0,0,0,0.8);
+  @include background(linear-gradient(top, #000, transparent 50%));
+}
+
+.show-tile__option {
+  position: absolute;
+  z-index: 100;
+
+  font-size: 16px; font-size: rem(16);
+
+  color: $light-blue;
+  text-decoration: none;
+
+  &:hover {
+    color: $dark-blue;
+  }
+}
+  .show-tile__option--immersive {
+    opacity: 0;
+    @include transition-property(color, opacity);
+    @include transition-duration(0.2s, 0.2s);
+
+    .show-tile:hover & {
+      opacity: 1;
+    }
+  }
+  .show-tile__option--left {
+    left: 10px; left: rem(10);
+    top: 10px; top: rem(10);
+  }
+  .show-tile__option--right {
+    right: 10px; right: rem(10);
+    top: 10px; top: rem(10);
+  }
+  .show-tile__option--light:hover {
+    color: white;
+  }

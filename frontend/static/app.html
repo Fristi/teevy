@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Teevy.co</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no"/>
+    <link rel="stylesheet" href="/assets/styles.min.css">
+    <link rel="shortcut icon" type="image/icon" href="/favicon.ico"/>
+</head>
+<body ng-app="teevyApp" class="l-page">
+<div id="fb-root"></div>
+<div class="page__content">
+    <div class="l-row--header" ng-controller="userCtrl">
+        <div class="l-wrap--responsive l-justified">
+            <div class="justified__item">
+                <a class="logo" href="/"></a>
+            </div>
+
+            <div dropdown open="showMenu" class="justified__item user-menu">
+                <a class="feedback__link" href="mailto:contact@teevy.co?Subject=Feedback" target="_blank">Have
+                    feedback?</a>
+
+                <button ng-click="showMenu = !showMenu" class="user-menu__icon icon icon--cog"></button>
+
+                <div class="island user-menu__dropdown dropdown">
+                    <img class="user-menu__avatar" ng-src={{user.userInfoAvatarUrl}}>
+
+                    <h3 class="user-menu__username">{{user.userInfoNickName}}</h3>
+                    <button class="user-menu__button button--grey" ng-click="logout()">Log out</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="l-row--high" ng-controller="appCtrl">
+        <div class="l-wrap--responsive l-justified">
+            <div class="justified__item--responsive">
+                <div class="navigation">
+                    <a href="#/dashboard" class="navigation__item ng-class: isActive('dashboard') "><h2>Dashboard</h2>
+                    </a>
+                    <a href="#/explore" class="navigation__item ng-class: isActive('explore')"><h2>Explore</h2></a>
+                </div>
+            </div>
+
+            <div class="justified__item--responsive">
+                <div dropdown open="showSearchResults" class="search-form icon icon--search">
+                    <input delayed-model="search" data-delay="500" type="text" class="search-form__input"
+                           placeholder="Search for a show">
+
+                    <div class="search__dropdown dropdown">
+                        <div ng-repeat="show in foundShows" class="flag island--small show-entry">
+                            <div class="flag__sidebar">
+                                <img ng-src="{{posterUrl(show, 45)}}" alt="{{show.showTitle}}" class="thumb">
+                            </div>
+                            <div class="flag__content">
+                                <h4>{{show.showTitle | characters:25:true}}</h4>
+                            </div>
+                            <div class="flag__sidebar--right">
+                                <button ng-if="!show.isSubscribed" class="button" ng-disabled="show.pending"
+                                        ng-click="subscribe(show)">Follow
+                                </button>
+                                <button ng-if="show.isSubscribed" class="button--dark" ng-disabled="show.pending"
+                                        ng-click="unsubscribe(show)">Unfollow
+                                </button>
+                            </div>
+                        </div>
+                        <div ng-hide="foundShows" class="island">
+                            <div class="search__empty">
+                                Sorry, couldn't find show '{{search}}' in the database.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="l-row">
+        <div class="l-wrap--responsive">
+            <div ng-view></div>
+        </div>
+    </div>
+</div>
+
+<div class="page__footer">
+    <div class="l-row footer">
+        <div class="l-wrap--responsive">
+            <div class="l-justified">
+                <div class="justified__item">© Teevy 2014; Follow <a class="footer__link" target="_blank"
+                                                                     href="https://twitter.com/TeevyCo">@TeevyCo</a>
+                </div>
+                <div class="justified__item">This product uses the TMDb API but is not endorsed or certified by TMDb
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/ng-template" id="explore.html">
+    <div class="grid">
+        <div ng-repeat="ss in explore.shows"
+             class="grid__item tw-iar--one-half th-iar--one-third fo-iar--one-quarter fi-iar--one-fifth">
+            <div class="show-tile">
+                <img ng-src="{{posterUrl(ss.subscribedTo,342)}}" alt="{{ss.subscribedTo.showTitle}}">
+
+                <div class="show-tile__overlay">
+                    <h3 class="island">{{ss.subscribedTo.showTitle}}</h3>
+                </div>
+                <div class="island tile-ui">
+                    <button ng-if="!ss.isSubscribed" class="button tile-ui__button" ng-disabled="ss.pending"
+                            ng-click="subscribe(ss)">Follow
+                    </button>
+                    <button ng-if="ss.isSubscribed" class="button--dark tile-ui__button" ng-disabled="ss.pending"
+                            ng-click="unsubscribe(ss)">Unfollow
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+
+<script type="text/ng-template" id="dashboard.html">
+    <div class="grid dashboard">
+        <div ng-hide="!model.subscriptions.subscriptionsUnconfigured.length">
+            <h3>Unconfigured</h3>
+
+            <div ng-repeat="subscription in model.subscriptions.subscriptionsUnconfigured"
+                 class="grid__item tw-iar--one-half th-iar--one-third fo-iar--one-quarter fi-iar--one-fifth">
+                <subscription-tile subscription="subscription" subscriptions="model"
+                                   state="unconfigured"></subscription-tile>
+            </div>
+        </div>
+
+        <div ng-hide="!model.subscriptions.subscriptionsToWatch.length">
+            <h3>To watch</h3>
+
+            <div ng-repeat="subscription in model.subscriptions.subscriptionsToWatch"
+                 class="grid__item tw-iar--one-half th-iar--one-third fo-iar--one-quarter fi-iar--one-fifth">
+                <subscription-tile subscription="subscription" subscriptions="model"
+                                   state="to-watch"></subscription-tile>
+            </div>
+        </div>
+
+        <div ng-hide="!model.subscriptions.subscriptionsToAir.length">
+            <h3>To air</h1>
+                <div ng-repeat="subscription in model.subscriptions.subscriptionsToAir"
+                     class="grid__item tw-iar--one-half th-iar--one-third fo-iar--one-quarter fi-iar--one-fifth">
+                    <subscription-tile subscription="subscription" subscriptions="model"
+                                       state="to-air"></subscription-tile>
+                </div>
+        </div>
+
+        <div ng-hide="!model.subscriptions.subscriptionsUnfinished.length">
+            <h3>In production</h1>
+                <div ng-repeat="subscription in model.subscriptions.subscriptionsUnfinished"
+                     class="grid__item tw-iar--one-half th-iar--one-third fo-iar--one-quarter fi-iar--one-fifth">
+                    <subscription-tile subscription="subscription" subscriptions="model"
+                                       state="unfinished"></subscription-tile>
+                </div>
+        </div>
+
+        <div ng-hide="!model.subscriptions.subscriptionsFinished.length">
+            <h3>Finished</h3>
+
+            <div ng-repeat="subscription in model.subscriptions.subscriptionsFinished"
+                 class="grid__item tw-iar--one-half th-iar--one-third fo-iar--one-quarter fi-iar--one-fifth">
+                <subscription-tile subscription="subscription" subscriptions="model"
+                                   state="finished"></subscription-tile>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="subscription-tile.html">
+    <div class="flip">
+        <div class="flip__card flip__card--front ng-class:{'flip__card--is-open': !config}">
+            <div class="show-tile">
+                <a href="" ng-click="enterConfig()"
+                   class="show-tile__option show-tile__option--immersive show-tile__option--right show-tile__option--light icon icon--cog"></a>
+
+                <img ng-src="{{posterUrl(getShow(), 342)}}" alt="{{getShow().showTitle}}">
+
+                <div class="show-tile__overlay">
+                    <h3 class="island">{{getShow().showTitle}}</h3>
+                </div>
+
+                <div ng-if="subscription.nextEpisode != null" class="island tile-ui">
+                    <div class="tile-ui__emph">Next to see: {{formatEpisodeId(getNextEpisode().episodeId)}}</div>
+
+                    <h4 class="tile-ui__heading">{{getNextEpisode().episodeTitle | characters:25:true}}</h4>
+
+                    <button ng-disabled="!isToWatch()" class="button tile-ui__button" ng-click="nextEpisode()"><span
+                            ng-if="isToWatch()">I watched this</span><span ng-if="isToAir()"><span
+                            ng-if="getNextEpisode().episodeReleaseDate != null">{{timeLeft(getNextEpisode())}}</span><span
+                            ng-if="getNextEpisode().episodeReleaseDate == null">No release date</a></span></button>
+                </div>
+
+                <div ng-if="isUnfinished()" class="island tile-ui">
+                    <h4 class="tile-ui__heading">You watched all aired episodes</h4>
+
+                    <button disabled="disabled" class="button tile-ui__button">No new air date</button>
+                </div>
+
+                <div ng-if="isFinished() && !subscription.showInProduction" class="island tile-ui">
+                    <h4 class="tile-ui__heading">You have finished watching this show</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="flip__card flip__card--back  ng-class:{'flip__card--is-open': config}">
+            <div class="show-tile">
+                <a href="" ng-if="initialized" ng-click="exitConfig()"
+                   class="show-tile__option show-tile__option--right show-tile__option icon icon--cross"></a>
+
+                <div class="island tile-ui--full" ng-if="!manual">
+                    <div class="bobber__wrap">
+                        <div class="bobber--bottom">
+                            <img class="thumb tile-ui__thumb" ng-src="{{posterUrl(getShow(), 45)}}"
+                                 alt="{{getShow().showTitle}}">
+
+                            <h3 class="tile-ui__heading">{{getShow().showTitle}}</h3>
+
+                            <div ng-if="!isUnconfigured()">
+                                <p class="island--small">What do you want to do?</p>
+
+                                <button class="button tile-ui__button--full" ng-click="enterManual()">Change episode
+                                </button>
+
+                                <button ng-disabled="pending" class="button--dark tile-ui__button--full"
+                                        ng-click="unsubscribe()">Remove show
+                                </button>
+                            </div>
+
+                            <div ng-if="isUnconfigured()">
+                                <p class="island--small">Follow from which episode?</p>
+
+                                <button class="button tile-ui__button--full" ng-disabled="pending"
+                                        ng-click="setFirstEpisode()">First aired: <span
+                                        class="button__emph">S1 E1</span></button>
+
+                                <button class="button tile-ui__button--full" ng-disabled="pending"
+                                        ng-click="setEpisode(getLastEpisode().episodeId)">Last aired: <span
+                                        class="button__emph">{{formatEpisodeId(getLastEpisode().episodeId)}}</span>
+                                </button>
+
+                                <button class="button tile-ui__button--full" ng-click="enterManual()">Choose manually
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile-ui--full" ng-if="manual">
+                    <div class="island tile-ui__subheading">Start following from</div>
+
+                    <ul class="tile-ui__select-list select-list">
+                        <li ng-repeat="ep in episodes">
+                            <div ng-click="selectEpisode(ep)"
+                                 class="select-list__item ng-class: {'not-aired': !isAired(ep), active: selected_episode === ep}">
+                                {{formatEpisodeId(ep.episodeId)}} - {{ep.episodeTitle | characters:25:true}}
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="island">
+                        <button class="button tile-ui__button--full" ng-disabled="pending"
+                                ng-click="setEpisode(selected_episode.episodeId)">Go
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script src="/assets/scripts.min.js"></script>
+<script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-47973422-1', 'teevy.co');
+    ga('send', 'pageview');
+
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '301441730011894',
+            status: true,
+            xfbml: true
+        });
+    };
+
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {
+            return;
+        }
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+name:                teevy-webservice
+version:             0.1.0.0
+author:              markdj
+maintainer:          mail@markdejong.org
+category:            Web
+build-type:          Simple
+cabal-version:       >=1.10
+
+executable teevy-webservice
+  -- ld-options:          -static -pthread
+  -- ghc-options:         -funbox-strict-fields -Wall -fwarn-tabs -O2 -optl-static -optl-pthread
+  
+  ghc-options: 		   -Wall -fno-warn-orphans
+  
+  main-is:             Teevy/Main.hs
+
+  other-modules:       Teevy.Text,
+
+                       Teevy.Messages.Commands.Models,
+                       Teevy.Messages.Commands.Instances,
+                       Teevy.Messages.Responses.Models,
+                       Teevy.Messages.Responses.Instances,
+                       Teevy.Messages.External.Models,
+                       Teevy.Messages.External.Instances,
+                       Teevy.Messages,
+
+                       Teevy.Services.Validations,
+                       Teevy.Services.ApiCall
+
+                       Teevy.Services.ShowService,
+                       Teevy.Services.StatService,
+                       Teevy.Services.UserService,
+                       Teevy.Services.ExploreService,
+                       Teevy.Services.SubscriptionService
+
+
+  build-depends:       base,
+                       attoparsec,
+                       case-insensitive == 1.1.0.3,
+                       aeson >= 0.6.2.1 && <0.8,
+                       containers == 0.4.2.1,
+                       base64-bytestring == 1.0.0.1,
+                       data-default,
+                       jwt,
+                       text >=1.1.0.0,
+                       postgresql-simple,
+                       scotty == 0.7.1,
+                       ghc-prim,
+                       mtl>=2.1.2 && <2.2,
+                       http-types,
+                       bytestring==0.10.0.2,
+                       time,
+                       email-validate,
+                       bcrypt,
+                       teevy-database,
+                       teevy-shared,
+                       tmdb,
+                       resource-pool-catchio,
+                       cryptohash,
+                       crypto-api,
+                       cereal,
+                       cryptohash-cryptoapi==0.1.0,
+
+                       -- forcing http-conduit to slow down on its dependencies
+                       conduit == 1.0.17.1,
+                       http-conduit == 2.0.0.1,
+                       http-client == 0.2.3.1
+                       -- end force
+
+  hs-source-dirs:      src
+  default-language:    Haskell2010

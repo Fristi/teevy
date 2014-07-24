@@ -1,0 +1,40 @@
+.user-menu {
+  position: relative;
+}
+
+.user-menu__icon {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 20px; font-size: rem(20);
+  color: $light-blue;
+}
+
+.user-menu__dropdown {
+  top: 35px; right: -13px;
+  top: rem(35); right: - rem(13);
+  width: 260px; width: rem(260);
+  text-align: center;
+
+  &:before {
+    right: 12px;
+  }
+}
+
+.user-menu__avatar {
+  height: 80px; height: rem(80);
+  width: 80px; width: rem(80);
+  margin-top: 20px;
+  border-radius: 4px;
+}
+
+.user-menu__username {
+  line-height: 50px; line-height: rem(50);
+}
+
+.user-menu__button {
+  margin-bottom: 10px;
+
+  & + & {
+    margin-left: 20px;
+  }
+}

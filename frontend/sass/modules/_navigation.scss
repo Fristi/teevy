@@ -1,0 +1,20 @@
+.navigation {
+  @include breakpoint($bp-one-in-a-row) {
+    text-align: center;
+    margin-bottom: 20px; margin-bottom: rem(20);
+  }
+}
+
+.navigation__item {
+  display: inline-block;
+  color: $light-blue;
+  text-decoration: none;
+
+  &.active {
+    color: $light;
+  }
+
+  & + & {
+    margin-left: 20px; margin-left: rem(20);
+  }
+}

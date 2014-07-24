@@ -1,0 +1,8 @@
+db.listen  : '*'
+db.root.pwd : 'blabla'
+db.teevy.pwd : 'blabla'
+db.endpoint : '10.1.2.3'
+db.acl : 'host teevy teevy 0.0.0.0/0 md5'
+
+loggly.token : ''
+profile  : 'dev'

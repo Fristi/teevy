@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Teevy.co</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no"/>
+    <link rel="stylesheet" href="/assets/styles.min.css">
+    <link rel="shortcut icon" type="image/icon" href="/favicon.ico"/>
+</head>
+<body ng-app="teevyLanding" ng-controller="appCtrl as ac" id="appController">
+<div id="fb-root"></div>
+<div class="l-row--absolute l-row--medium">
+    <div class="l-wrap">
+        <div class="l-justified">
+            <div class="justified__item">
+                <a class="logo logo--landing" href="/"></a>
+            </div>
+
+            <div class="justified__item">
+                <div class="menu-guest">
+                    <button class="menu-guest__button button" ng-click="ac.changeModalType('signup')">Sign up</button>
+                    or
+                    <button href="" class="menu-guest__button" ng-click="ac.changeModalType('login')">Log in</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="l-row--fullheight landing-pitch">
+    <div class="bobber__wrap--center">
+        <div class="bobber--middle">
+            <h1 class="landing-pitch__heading">Keep track of your shows in a beautiful way.</h1>
+
+            <div class="landing-pitch__slogan">Never forget where you are and always know when a next episode is
+                airing.
+            </div>
+            <img src="/images/landing-tiles.png" alt="" class="landing-pitch__tiles">
+        </div>
+    </div>
+</div>
+
+<div ng-if="ac.modalType" ng-cloak>
+    <div class="l-row--overlay"></div>
+
+    <div class="l-row--fullheight l-row--absolute">
+        <div class="bobber__wrap--center">
+            <div class="bobber--middle">
+                <div class="flip" modal="ac.modalType">
+                    <div class="flip__card flip__card--front ng-class: {'flip__card--is-open': ac.modalType == 'signup'}">
+                        <div class="island modal">
+
+                            <form ng-submit="ac.signUp()">
+                                <h3 class="modal__heading--lines">Sign up</h3>
+
+                                <div>
+                                    <input ng-click="ac.resetErrors()" pattern=".{2,}" type="text" class="modal__input"
+                                           placeholder="Nickname"
+                                           title="Nickname field is required (minimum 2 characters)" required
+                                           ng-model="ac.nickname">
+                                    <input ng-click="ac.resetErrors()" type="email" class="modal__input"
+                                           placeholder="Email address" title="Email field is required" required
+                                           ng-model="ac.email">
+                                </div>
+
+                                <div password-confirmation>
+                                    <input type="password" pattern=".{8,}" class="modal__input password"
+                                           placeholder="Password"
+                                           title="Password field is required (minimum 8 characters)" required
+                                           ng-model="ac.password">
+                                    <input type="password" pattern=".{8,}" class="modal__input confirmation"
+                                           placeholder="Password confirmation" required
+                                           ng-model="ac.password_confirmation">
+                                </div>
+
+                                <div class="island--small message--error" ng-repeat="error in ac.errors">
+                                    <p>{{error}}</p>
+                                </div>
+
+                                <button class="button modal__button">Sign up</button>
+                            </form>
+
+                            Already have an account?
+                            <button class="modal__fliplink" ng-click="ac.changeModalType('login')">Log in here</button>
+                        </div>
+                    </div>
+
+                    <div class="flip__card flip__card--back ng-class: {'flip__card--is-open': ac.modalType == 'login'}">
+                        <div class="island modal">
+
+                            <h3 class="modal__heading">Log in quickly</h3>
+
+                            <div>
+                                <button class="modal__button button--facebook" ng-click="ac.facebookLogin()"><i
+                                        class="icon icon--facebook"></i>With Facebook
+                                </button>
+                            </div>
+
+
+                            <form ng-submit="ac.logIn()">
+                                <h3 class="modal__heading--lines">or with your account</h3>
+
+                                <div>
+                                    <input ng-click="ac.resetErrors()" type="text" class="modal__input"
+                                           placeholder="Username or email" title="This field is required" required
+                                           ng-model="ac.login">
+                                    <input ng-click="ac.resetErrors()" type="password" class="modal__input"
+                                           placeholder="Password" title="This field is required" required
+                                           ng-model="ac.password">
+                                </div>
+
+                                <div class="island--small message--error" ng-repeat="error in ac.errors">
+                                    <p>{{error}}</p>
+                                </div>
+
+                                <button class="button modal__button">Let me in</button>
+                            </form>
+
+                            Don’t have an account yet?
+                            <button class="modal__fliplink" ng-click="ac.changeModalType('signup')">Sign up here
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/assets/scripts.min.js"></script>
+<script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-47973422-1', 'teevy.co');
+    ga('send', 'pageview');
+
+    window.fbAsyncInit = function () {
+        FB.Event.subscribe('auth.authResponseChange', function(response) {
+            if (response.status === 'connected') {
+                var appControllerElement = document.getElementById("appController");
+                var controller = angular.element(appControllerElement).controller();
+                controller.facebookAuthenticated(response);
+            }
+        });
+
+        FB.init({
+            appId: '301441730011894',
+            status: false,
+            xfbml: true
+        });
+    };
+
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {
+            return;
+        }
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+</body>
+</html>

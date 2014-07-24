@@ -1,0 +1,63 @@
+/**
+ * mix of SMACSS + OOCSS approaches:
+ * no separate "theme" and "state" styles for modules -
+ * those are included in module style file
+ * read more here http://webuild.envato.com/blog/how-to-scale-and-maintain-legacy-css-with-sass-and-smacss/
+ */
+
+// Global configurations & fonts
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700);
+@import "compass";
+@import "config";
+
+// Functions and mixins
+@import "functions/rem";
+
+@import "mixins/breakpoint";
+
+// (SMACSS) Base styles: resets & bare element styling
+@import "base/normalize";
+@import "base/elements";
+@import "base/icons";
+
+// (OOCSS) Reusable abstract objects
+@import "abstractions/island";
+@import "abstractions/bobber";
+@import "abstractions/flag";
+
+// (SMACSS) styles for layouts
+@import "layouts/row";
+@import "layouts/wrap";
+@import "layouts/grid";
+@import "layouts/justified";
+@import "layouts/page";
+
+// (SMACSS) Styles for modules
+@import "modules/buttons";
+@import "modules/logo";
+@import "modules/landing-pitch";
+@import "modules/landing-image";
+@import "modules/footer";
+@import "modules/flipper";
+@import "modules/modal";
+@import "modules/user-menu";
+@import "modules/dropdown";
+@import "modules/navigation";
+@import "modules/search-form";
+@import "modules/show-entry";
+@import "modules/show-tile";
+@import "modules/tile-ui";
+@import "modules/thumb";
+@import "modules/select-list";
+@import "modules/message";
+@import "modules/menu-guest";
+@import "modules/dashboard";
+
+// (SMACSS) Global state styles.
+//          Module-specific styles are inside module file
+@import "states";
+
+@import "shame";
+
+// vendor & others
+@import "vendor/animate"

@@ -1,0 +1,10 @@
+.show-entry {
+  & + & {
+    border-top: 1px solid #F4F4F4;
+  }
+}
+
+.show-entry__emph {
+  color: $light-blue;
+  text-transform: uppercase;
+}

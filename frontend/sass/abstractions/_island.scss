@@ -1,0 +1,26 @@
+/**
+ * ISLAND ABSTRACTION:
+ * boxing off some piece of content
+ *
+ * idea here http://csswizardry.com/2011/10/the-island-object/
+ */
+
+.island {
+  padding: 20px; padding: rem(20);
+
+  & > :last-child {
+    margin-bottom: 0;
+  }
+}
+
+.island--small {
+  @extend .island;
+
+  padding: 10px; padding: rem(10);
+}
+
+.island--large {
+  @extend .island;
+
+  padding: 50px; padding: rem(50);
+}

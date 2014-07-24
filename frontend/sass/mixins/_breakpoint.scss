@@ -1,0 +1,5 @@
+@mixin breakpoint( $condition ){
+  @media only screen and #{$condition} {
+    @content;
+  }
+}

@@ -1,0 +1,40 @@
+.flip__card {
+  display: none;
+}
+
+.flip__card--is-open {
+  display: block;
+}
+
+@media only screen {
+  .flip {
+    position: relative;
+    @include perspective(1000px);
+  }
+
+  .flip__card {
+    display: block;
+    @include transition-property(transform, opacity);
+    @include transition-duration(0.8s, 0);
+    @include transition-delay(0, 0.25s);
+    @include backface-visibility(hidden);
+    @include transform-style(preserve-3d);
+    opacity: 0;
+  }
+
+  .flip__card--front {
+    @include rotateX(180deg);
+  }
+
+  .flip__card--back {
+    @include rotateX(-180deg);
+    position: absolute;
+    width: 100%;
+    top: 0; left: 0;
+  }
+
+  .flip__card--is-open {
+    opacity: 1;
+    @include rotateX(0deg);
+  }
+}

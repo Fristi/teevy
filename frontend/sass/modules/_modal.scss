@@ -1,0 +1,67 @@
+.modal {
+  background: $light;
+  border-radius: 8px;
+  max-width: 550px;
+  color: $dark-blue;
+}
+
+.modal__heading {
+  display: inline-block;
+  margin-bottom: 20px; margin-bottom: rem(20);
+
+  font-weight: 300;
+  color: $light-blue;
+}
+
+.modal__heading--lines {
+  @extend .modal__heading;
+
+  @include breakpoint($bp-two-in-a-row) {
+    position: relative;
+
+    &:before,
+    &:after {
+      content:'';
+      position: absolute;
+      top: 50%;
+      height: 1px;
+      width: 20%;
+      background: #D8D8D8;
+    }
+
+    &:before { left: -23%; }
+    &:after { right: -23%; }
+  }
+}
+
+%modal-ui-elem {
+  width: 100%;
+  height: 48px; height: rem(48);
+  margin-bottom: 20px; margin-bottom: rem(20);
+
+  line-height: 48px; line-height: rem(48);
+
+  @include breakpoint($bp-two-in-a-row) {
+    width: 200px;
+
+    & + & {
+      margin-left: 20px; margin-left: rem(20);
+    }
+  }
+}
+
+.modal__button {
+  @extend %modal-ui-elem;
+}
+
+.modal__input {
+  @extend %modal-ui-elem;
+
+  background: #F5F5F5;
+  border: 1px solid #DFDFDF;
+}
+
+.modal__fliplink {
+  color: $green;
+  text-decoration: underline;
+}

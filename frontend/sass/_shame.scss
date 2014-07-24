@@ -1,0 +1,18 @@
+.feedback__link {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 27px; line-height: rem(27);
+  margin-right: 20px; margin-right: rem(20);
+
+  color: $light-blue;
+  text-decoration: none;
+
+  border-bottom: 1px solid rgba($light-blue, 0.5);
+
+  @include transition-property(border-color);
+  @include transition-duration(0.2s);
+
+  &:hover {
+    border-bottom-color: transparent;
+  }
+}

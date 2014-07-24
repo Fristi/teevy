@@ -1,0 +1,28 @@
+{
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "sudo apt-get -y update",
+        "sudo apt-get -y install ruby",
+        "sudo gem install puppet"
+      ]
+    },
+    {
+      "type": "puppet-masterless",
+      "manifest_file": "puppet/manifests/init.pp",
+      "manifest_dir": "puppet/manifests",
+      "module_paths": ["puppet/modules"],
+      "hiera_config_path": "puppet/manifests/hiera-do.yaml"
+    }
+  ],
+  "builders": [
+    {
+      "type": "digitalocean",
+      "client_id": "bla",
+      "api_key": "bla",
+      "image_id": 473123,
+      "region_id": 4
+    }
+  ]
+}

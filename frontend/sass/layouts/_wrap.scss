@@ -1,0 +1,24 @@
+/**
+ * MAIN LAYOUT WRAPEPR
+ * handles max-width for different breakpoints
+ */
+
+.l-wrap {
+  padding-left: 20px; padding-left: rem(20);
+  padding-right: 20px; padding-right: rem(20);
+
+  @include breakpoint($bp-three-in-a-row) {
+    padding-left: 40px; padding-left: rem(40);
+    padding-right: 40px; padding-right: rem(40);
+  }
+}
+
+.l-wrap--responsive {
+  margin-left: auto; margin-right: auto;
+  padding-left: 20px; padding-right: 20px;
+
+  @include breakpoint($bp-two-in-a-row) { max-width: #{$two-in-a-row}px; max-width: rem($two-in-a-row); }
+  @include breakpoint($bp-three-in-a-row) { max-width: #{$three-in-a-row}px; max-width: rem($three-in-a-row); }
+  @include breakpoint($bp-four-in-a-row) { max-width: #{$four-in-a-row}px; max-width: rem($four-in-a-row); }
+  @include breakpoint($bp-five-in-a-row) { max-width: #{$five-in-a-row}px; max-width: rem($five-in-a-row); }
+}

@@ -1,0 +1,43 @@
+/**
+ * FLAG ABSTRACTION
+ * extension for media abstraction with possibility of vertical alignment
+ *
+ * idea here http://csswizardry.com/2013/05/the-flag-object/
+ */
+
+.flag {
+  display: table;
+  width: 100%;
+}
+
+.flag__sidebar,
+.flag__content {
+    display: table-cell;
+    vertical-align: middle;
+
+    & > img {
+      max-width: inherit !important; // fix Chrome bug with collapsing table-cell if it has img with max-width inside
+    }
+
+    .flag--top & {
+        vertical-align: top;
+    }
+
+    .flag--bottom & {
+        vertical-align: bottom;
+    }
+}
+
+.flag__sidebar {
+  padding-right: 10px;
+}
+
+.flag__sidebar--right {
+  @extend .flag__sidebar;
+  padding-right: 0;
+  padding-left: 10px;
+}
+
+.flag__content {
+    width: 100%;
+}

@@ -1,0 +1,96 @@
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+*:focus {
+  outline: none;
+}
+
+html {
+  height: 100%;
+  min-width: $layout-min-width;
+
+  font-size: 100%;
+}
+
+body {
+  background: #263238;
+  height: 100%;
+
+  font-family: $base-font-family;
+  font-size: rem($base-font-size);
+  line-height: rem($base-line-height);
+  -webkit-font-smoothing: antialiased;
+
+  color: $dark-blue;
+}
+
+h1 {
+  margin: 0;
+
+  font-size: 32px; font-size: rem(32);
+  line-height: 36px; line-height: rem(36);
+  font-weight: 300;
+}
+
+h2 {
+  margin: 0;
+
+  font-size: 26px; font-size: rem(26);
+  line-height: 33px; line-height: rem(33);
+  font-weight: 300;
+}
+
+h3 {
+  margin: 0;
+
+  font-size: 20px; font-size: rem(20);
+  line-height: 25px; line-height: rem(25);
+  font-weight: 400;
+}
+
+h4 {
+  margin: 0;
+
+  font-size: 16px; font-size: rem(16);
+  line-height: 22px; line-height: rem(22);
+  font-weight: 300;
+}
+
+p {
+  margin: 0;
+}
+
+input {
+  padding: 0 16px; padding: 0 rem(16);
+  border-radius: 4px;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  -webkit-appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  color: $light;
+}
+
+img {
+  display: inline-block;
+  max-width: 100%;
+  border-radius: 4px;
+}
+
+ul {
+  @include appearance(none);
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}

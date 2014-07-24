@@ -1,0 +1,5 @@
+.idea
+.vagrant
+packaging/versions
+infra/puppet/modules/teevy/files/bin
+infra/puppet/modules/teevy/files/static

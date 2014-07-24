@@ -1,0 +1,4 @@
+image: haskell
+script:
+  - cabal update
+  - sh deploy/build.sh 1.0.0

@@ -1,0 +1,7 @@
+Package: teevy
+Version: 1.0.0
+Section: base
+Priority: optional
+Architecture: i386
+Maintainer: Mark <mail@markdejong.org>
+Description: Teevy

@@ -1,0 +1,6 @@
+@function rem($pixel-size) {
+  /**
+   * returns size in REM units from given PX units
+   */
+  @return #{$pixel-size/16}rem;
+}

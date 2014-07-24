@@ -1,0 +1,8 @@
+**/log/*.log
+**/tmp
+**/.env
+
+**/dist
+**/pstatic
+**/ptl-pthread
+**/sandbox

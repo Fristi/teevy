@@ -1,0 +1,55 @@
+.tile-ui {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%;
+
+  color: $light-blue;
+  font-size: 12px; font-size: rem(12);
+  line-height: 18px; line-height: rem(18);
+
+  background: $light;
+}
+
+.tile-ui--full {
+  @extend .tile-ui;
+
+  height: 100%;
+}
+
+.tile-ui__button {
+  width: 80%;
+}
+
+.tile-ui__button--full {
+  @extend .tile-ui__button;
+  width: 100%;
+
+  & + & {
+    margin-top: 10px; margin-top: rem(10);
+  }
+}
+
+.tile-ui__emph {
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 10px; margin-bottom: rem(10);
+}
+
+.tile-ui__heading {
+  color: $dark-blue;
+  margin-bottom: 15px; margin-bottom: rem(15);
+}
+
+.tile-ui__thumb {
+  display: inline-block;
+}
+
+.tile-ui__select-list {
+  text-align: left;
+  border-top: 1px solid #CED6DA;
+  border-bottom: 1px solid #CED6DA;
+
+  height: 220px;
+  overflow: auto;
+  color: $dark-blue;
+}
